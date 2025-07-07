@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import type { Arriendo } from "../types/arriendo"
-import axios from "axios"
+import { deleteArriendo } from "../services/ArriendoService"
 
 type ArriendoFilaProps = {
     index: number,
@@ -10,9 +10,10 @@ type ArriendoFilaProps = {
 export default function FilaCompletados({index,arriendo}:ArriendoFilaProps){
     index = index
     const navigate = useNavigate()
-    const borrarArriendo = async () => {
+
+    const borrandoArriendo = async () => {
         try {
-            await axios.delete(`http://localhost:3000/api/arriendos/${arriendo.id}`);
+            await deleteArriendo(arriendo.id)
             navigate(".", { replace: true });
  
         } catch (error) {
@@ -30,7 +31,7 @@ export default function FilaCompletados({index,arriendo}:ArriendoFilaProps){
                <td>{arriendo.rutCliente}</td>
                <td>{arriendo.nombreCliente}</td>
                <td>
-                   <button className="btn btn-sm btn-danger mx-1" onClick={() => borrarArriendo()}>
+                   <button className="btn btn-sm btn-danger mx-1" onClick={() => borrandoArriendo()}>
                          <i className="bi bi-trash"></i>
                    </button>
                </td>

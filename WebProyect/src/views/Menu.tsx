@@ -57,7 +57,7 @@ export default function Menu(){
             const usado = activos.some(a => a.patenteVehiculo === plate)
             if(usado){
                 console.log("Usado")
-                setMessage("No Hay Autos Disponibles")
+                setMessage("Auto no Disponible")
             }
             else{
                 const disponible = completados.some(b => {
@@ -147,7 +147,18 @@ export default function Menu(){
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="InputType">Car Type</label>
-                                            <input type="text" className="form-control" id="InputType" maxLength={20} value={tipo} onChange={(e) => setTipo(e.target.value)} required/>
+                                            <select
+                                                 className="form-control"
+                                                 id="InputType"
+                                                 value={tipo}
+                                                 onChange={(e) => setTipo(e.target.value)}
+                                                 required
+                                            >
+                                                <option value="" disabled>-- Selecciona Tipo de Auto --</option>
+                                                <option value="Camioneta">Camioneta</option>
+                                                <option value="Sedan">Sedan</option>
+                                                <option value="SUV">SUV</option>                                            
+                                            </select>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="InputRut">Input ID</label>
@@ -170,7 +181,7 @@ export default function Menu(){
                                                 <input 
                                                      type="text" 
                                                      className="form-control" 
-                                                     id="InputRut2" pattern="[0-9]" 
+                                                     id="InputRut2" pattern="[0-9K]" 
                                                      maxLength={1} 
                                                      style={{ maxWidth: "100px" }}
                                                      value={idPart2}

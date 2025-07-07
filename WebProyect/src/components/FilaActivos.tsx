@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import type { Arriendo } from "../types/arriendo"
-import axios from "axios"
+import { deleteArriendo, updateArriendo } from "../services/ArriendoService"
 
 type ArriendoFilaProps = {
     index: number,
@@ -12,17 +12,15 @@ export default function FilaActivos({index,arriendo}:ArriendoFilaProps){
     const navigate = useNavigate()
     const completarArriendo = async () => {
         try {
-        await axios.put(`http://localhost:3000/api/arriendos/${arriendo.id}`, {
-            fechaFin: new Date().toISOString(),
-        });
-        navigate(".", { replace: true }); 
+            await updateArriendo(arriendo.id)
+            navigate(".", { replace: true }); 
         } catch (error) {
             console.error("Error updating arriendo", error);
         }
     }
-    const borrarArriendo = async () => {
+    const borrandoArriendo = async () => {
         try {
-            await axios.delete(`http://localhost:3000/api/arriendos/${arriendo.id}`);
+            await deleteArriendo(arriendo.id)
             navigate(".", { replace: true });
  
         } catch (error) {
@@ -43,7 +41,7 @@ export default function FilaActivos({index,arriendo}:ArriendoFilaProps){
                    <button className="btn btn-sm btn-warning mx-1" onClick={() => completarArriendo()}>
                          <i className="bi bi-check"></i>
                    </button>
-                   <button className="btn btn-sm btn-danger mx-1" onClick={() => borrarArriendo()}>
+                   <button className="btn btn-sm btn-danger mx-1" onClick={() => borrandoArriendo()}>
                          <i className="bi bi-trash"></i>
                    </button>
                </td>

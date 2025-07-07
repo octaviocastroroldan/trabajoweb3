@@ -107,3 +107,25 @@ export async function agregarArriendo(datos: {
     return { success: false, error };
   }
 }
+
+
+export async function deleteArriendo (id: number){
+    try {
+            //await axios.delete(`http://localhost:3000/api/arriendos/${fecha}`)
+            await axios.delete(`arriendos/${id}`)
+
+        } catch (error) {
+            console.error("Error deleting arriendo", error);
+        }
+
+}
+
+export async function updateArriendo (id: number){
+    try {
+        await axios.put(`arriendos/${id}`, {
+            fechaFin: new Date().toISOString(),
+        });
+        } catch (error) {
+            console.error("Error updating arriendo", error);
+        }
+}
